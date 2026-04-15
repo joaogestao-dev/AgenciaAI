@@ -19,7 +19,7 @@ export function Projects() {
   const { setBreadcrumbs } = useBreadcrumbs();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Projects" }]);
+    setBreadcrumbs([{ label: "Projetos" }]);
   }, [setBreadcrumbs]);
 
   const { data: allProjects, isLoading, error } = useQuery({

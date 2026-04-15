@@ -224,15 +224,15 @@ export function CompanySettings() {
 
   useEffect(() => {
     setBreadcrumbs([
-      { label: selectedCompany?.name ?? "Company", href: "/dashboard" },
-      { label: "Settings" }
+      { label: selectedCompany?.name ?? "Empresa", href: "/dashboard" },
+      { label: "Configurações" }
     ]);
   }, [setBreadcrumbs, selectedCompany?.name]);
 
   if (!selectedCompany) {
     return (
       <div className="text-sm text-muted-foreground">
-        No company selected. Select a company from the switcher above.
+        Nenhuma empresa selecionada. Selecione uma empresa no seletor acima.
       </div>
     );
   }
@@ -249,16 +249,16 @@ export function CompanySettings() {
     <div className="max-w-2xl space-y-6">
       <div className="flex items-center gap-2">
         <Settings className="h-5 w-5 text-muted-foreground" />
-        <h1 className="text-lg font-semibold">Company Settings</h1>
+        <h1 className="text-lg font-semibold">Configurações da Empresa</h1>
       </div>
 
       {/* General */}
       <div className="space-y-4">
         <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-          General
+          Geral
         </div>
         <div className="space-y-3 rounded-md border border-border px-4 py-4">
-          <Field label="Company name" hint="The display name for your company.">
+          <Field label="Nome da empresa" hint="O nome de exibição da sua empresa.">
             <input
               className="w-full rounded-md border border-border bg-transparent px-2.5 py-1.5 text-sm outline-none"
               type="text"
@@ -267,14 +267,14 @@ export function CompanySettings() {
             />
           </Field>
           <Field
-            label="Description"
-            hint="Optional description shown in the company profile."
+            label="Descrição"
+            hint="Descrição opcional exibida no perfil da empresa."
           >
             <input
               className="w-full rounded-md border border-border bg-transparent px-2.5 py-1.5 text-sm outline-none"
               type="text"
               value={description}
-              placeholder="Optional company description"
+              placeholder="Descrição opcional da empresa"
               onChange={(e) => setDescription(e.target.value)}
             />
           </Field>
@@ -284,7 +284,7 @@ export function CompanySettings() {
       {/* Appearance */}
       <div className="space-y-4">
         <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-          Appearance
+          Aparência
         </div>
         <div className="space-y-3 rounded-md border border-border px-4 py-4">
           <div className="flex items-start gap-4">
@@ -316,7 +316,7 @@ export function CompanySettings() {
                         onClick={handleClearLogo}
                         disabled={clearLogoMutation.isPending}
                       >
-                        {clearLogoMutation.isPending ? "Removing..." : "Remove logo"}
+                        {clearLogoMutation.isPending ? "Removendo..." : "Remover logo"}
                       </Button>
                     </div>
                   )}
@@ -339,8 +339,8 @@ export function CompanySettings() {
                 </div>
               </Field>
               <Field
-                label="Brand color"
-                hint="Sets the hue for the company icon. Leave empty for auto-generated color."
+                label="Cor da marca"
+                hint="Define o tom do ícone da empresa. Deixe vazio para cor automática."
               >
                 <div className="flex items-center gap-2">
                   <input
@@ -368,7 +368,7 @@ export function CompanySettings() {
                       onClick={() => setBrandColor("")}
                       className="text-xs text-muted-foreground"
                     >
-                      Clear
+                      Limpar
                     </Button>
                   )}
                 </div>
@@ -404,12 +404,12 @@ export function CompanySettings() {
       {/* Hiring */}
       <div className="space-y-4" data-testid="company-settings-team-section">
         <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-          Hiring
+          Contratação
         </div>
         <div className="rounded-md border border-border px-4 py-3">
           <ToggleField
-            label="Require board approval for new hires"
-            hint="New agent hires stay pending until approved by board."
+            label="Exigir aprovação do painel para novas contratações"
+            hint="Novas contratações de agentes ficam pendentes até serem aprovadas pelo painel."
             checked={!!selectedCompany.requireBoardApprovalForNewAgents}
             onChange={(v) => settingsMutation.mutate(v)}
             toggleTestId="company-settings-team-approval-toggle"
@@ -540,7 +540,7 @@ export function CompanySettings() {
       {/* Import / Export */}
       <div className="space-y-4">
         <div className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
-          Company Packages
+          Pacotes da Empresa
         </div>
         <div className="rounded-md border border-border px-4 py-4">
           <p className="text-sm text-muted-foreground">
@@ -567,12 +567,12 @@ export function CompanySettings() {
       {/* Danger Zone */}
       <div className="space-y-4">
         <div className="text-xs font-medium text-destructive uppercase tracking-wide">
-          Danger Zone
+          Zona de Perigo
         </div>
         <div className="space-y-3 rounded-md border border-destructive/40 bg-destructive/5 px-4 py-4">
           <p className="text-sm text-muted-foreground">
-            Archive this company to hide it from the sidebar. This persists in
-            the database.
+            Arquivar esta empresa para ocultá-la da barra lateral. Isso persiste no
+            banco de dados.
           </p>
           <div className="flex items-center gap-2">
             <Button

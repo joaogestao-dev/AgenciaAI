@@ -33,7 +33,7 @@ export function InstanceSettings() {
 
   useEffect(() => {
     setBreadcrumbs([
-      { label: "Instance Settings" },
+      { label: "Configurações da Instância" },
       { label: "Heartbeats" },
     ]);
   }, [setBreadcrumbs]);

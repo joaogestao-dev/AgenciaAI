@@ -24,14 +24,28 @@ export const issueStatusOrder = ["in_progress", "todo", "backlog", "in_review", 
 export const issuePriorityOrder = ["critical", "high", "medium", "low"];
 
 export const issueQuickFilterPresets = [
-  { label: "All", statuses: [] as string[] },
-  { label: "Active", statuses: ["todo", "in_progress", "in_review", "blocked"] },
+  { label: "Todos", statuses: [] as string[] },
+  { label: "Ativos", statuses: ["todo", "in_progress", "in_review", "blocked"] },
   { label: "Backlog", statuses: ["backlog"] },
-  { label: "Done", statuses: ["done", "cancelled"] },
+  { label: "Concluídos", statuses: ["done", "cancelled"] },
 ];
 
+const filterLabelMap: Record<string, string> = {
+  backlog: "Backlog",
+  todo: "A Fazer",
+  in_progress: "Em Andamento",
+  in_review: "Em Revisão",
+  blocked: "Bloqueado",
+  done: "Concluído",
+  cancelled: "Cancelado",
+  critical: "Crítico",
+  high: "Alto",
+  medium: "Médio",
+  low: "Baixo",
+};
+
 export function issueFilterLabel(value: string): string {
-  return value.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+  return filterLabelMap[value] ?? value.replace(/_/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 export function issueFilterArraysEqual(a: string[], b: string[]): boolean {

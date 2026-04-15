@@ -308,7 +308,7 @@ export function FailedRunInboxRow({
                   {issue.title}
                 </>
               ) : (
-                <>Failed run{linkedAgentName ? ` — ${linkedAgentName}` : ""}</>
+                <>Execução falhou{linkedAgentName ? ` — ${linkedAgentName}` : ""}</>
               )}
             </span>
             <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
@@ -329,7 +329,7 @@ export function FailedRunInboxRow({
             disabled={isRetrying}
           >
             <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
-            {isRetrying ? "Retrying…" : "Retry"}
+            {isRetrying ? "Tentando…" : "Tentar novamente"}
           </Button>
           {!showUnreadSlot && (
             <button
@@ -460,8 +460,8 @@ function ApprovalInboxRow({
             </span>
             <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
               <span className="capitalize">{approvalStatusLabel(approval.status)}</span>
-              {requesterName ? <span>requested by {requesterName}</span> : null}
-              <span>updated {timeAgo(approval.updatedAt)}</span>
+              {requesterName ? <span>solicitado por {requesterName}</span> : null}
+              <span>atualizado {timeAgo(approval.updatedAt)}</span>
             </span>
           </span>
         </Link>
@@ -473,7 +473,7 @@ function ApprovalInboxRow({
               onClick={onApprove}
               disabled={isPending}
             >
-              Approve
+              Aprovar
             </Button>
             <Button
               variant="destructive"
@@ -482,7 +482,7 @@ function ApprovalInboxRow({
               onClick={onReject}
               disabled={isPending}
             >
-              Reject
+              Rejeitar
             </Button>
           </div>
         ) : null}
@@ -537,8 +537,8 @@ function JoinRequestInboxRow({
 }) {
   const label =
     joinRequest.requestType === "human"
-      ? "Human join request"
-      : `Agent join request${joinRequest.agentName ? `: ${joinRequest.agentName}` : ""}`;
+      ? "Solicitação de entrada (humano)"
+      : `Solicitação de agente${joinRequest.agentName ? `: ${joinRequest.agentName}` : ""}`;
   const showUnreadSlot = unreadState !== null;
   const showUnreadDot = unreadState === "visible" || unreadState === "fading";
 
@@ -592,7 +592,7 @@ function JoinRequestInboxRow({
               {label}
             </span>
             <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
-              <span>requested {timeAgo(joinRequest.createdAt)} from IP {joinRequest.requestIp}</span>
+              <span>solicitado {timeAgo(joinRequest.createdAt)} do IP {joinRequest.requestIp}</span>
               {joinRequest.adapterType && <span>adapter: {joinRequest.adapterType}</span>}
             </span>
           </span>
@@ -604,7 +604,7 @@ function JoinRequestInboxRow({
             onClick={onApprove}
             disabled={isPending}
           >
-            Approve
+            Aprovar
           </Button>
           <Button
             variant="destructive"
@@ -613,7 +613,7 @@ function JoinRequestInboxRow({
             onClick={onReject}
             disabled={isPending}
           >
-            Reject
+            Rejeitar
           </Button>
         </div>
       </div>
@@ -624,7 +624,7 @@ function JoinRequestInboxRow({
           onClick={onApprove}
           disabled={isPending}
         >
-          Approve
+          Aprovar
         </Button>
         <Button
           variant="destructive"
@@ -633,7 +633,7 @@ function JoinRequestInboxRow({
           onClick={onReject}
           disabled={isPending}
         >
-          Reject
+          Rejeitar
         </Button>
       </div>
     </div>
@@ -714,7 +714,7 @@ export function Inbox() {
   });
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Inbox" }]);
+    setBreadcrumbs([{ label: "Caixa de Entrada" }]);
   }, [setBreadcrumbs]);
 
   useEffect(() => {
@@ -1701,7 +1701,7 @@ export function Inbox() {
   }, [selectedIndex]);
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={InboxIcon} message="Select a company to view inbox." />;
+    return <EmptyState icon={InboxIcon} message="Selecione uma empresa para ver a caixa de entrada." />;
   }
 
   const hasRunFailures = failedRuns.length > 0;
@@ -1785,14 +1785,14 @@ export function Inbox() {
             items={[
               {
                 value: "mine",
-                label: "Mine",
+                label: "Minha",
               },
               {
                 value: "recent",
-                label: "Recent",
+                label: "Recente",
               },
-              { value: "unread", label: "Unread" },
-              { value: "all", label: "All" },
+              { value: "unread", label: "Não lido" },
+              { value: "all", label: "Todos" },
             ]}
           />
         </Tabs>
@@ -1802,7 +1802,7 @@ export function Inbox() {
             <Search className="pointer-events-none absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search inbox…"
+              placeholder="Buscar na caixa…"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
@@ -1982,14 +1982,14 @@ export function Inbox() {
           icon={searchQuery.trim() ? Search : InboxIcon}
           message={
             searchQuery.trim()
-              ? "No inbox items match your search."
+              ? "Nenhum item corresponde à sua busca."
               : tab === "mine"
-              ? "Inbox zero."
+              ? "Caixa de entrada vazia."
               : tab === "unread"
-              ? "No new inbox items."
+              ? "Nenhum item novo."
               : tab === "recent"
-                ? "No recent inbox items."
-                : "No inbox items match these filters."
+                ? "Nenhum item recente."
+                : "Nenhum item corresponde a esses filtros."
           }
         />
       )}

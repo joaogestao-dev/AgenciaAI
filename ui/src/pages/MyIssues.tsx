@@ -17,7 +17,7 @@ export function MyIssues() {
   const { setBreadcrumbs } = useBreadcrumbs();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "My Issues" }]);
+    setBreadcrumbs([{ label: "Minhas Tarefas" }]);
   }, [setBreadcrumbs]);
 
   const { data: issues, isLoading, error } = useQuery({

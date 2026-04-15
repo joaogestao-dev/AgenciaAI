@@ -94,7 +94,7 @@ export function Org() {
   const { setBreadcrumbs } = useBreadcrumbs();
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Org Chart" }]);
+    setBreadcrumbs([{ label: "Organograma" }]);
   }, [setBreadcrumbs]);
 
   const { data, isLoading, error } = useQuery({

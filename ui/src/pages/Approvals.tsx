@@ -26,7 +26,7 @@ export function Approvals() {
   const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Approvals" }]);
+    setBreadcrumbs([{ label: "Aprovações" }]);
   }, [setBreadcrumbs]);
 
   const { data, isLoading, error } = useQuery({

@@ -233,9 +233,9 @@ function IssueSearchInput({
             e.currentTarget.blur();
           }
         }}
-        placeholder="Search issues..."
+        placeholder="Buscar tarefas..."
         className="pl-7 text-xs sm:text-sm"
-        aria-label="Search issues"
+        aria-label="Buscar tarefas"
         data-page-search-target="true"
       />
     </div>
@@ -493,7 +493,7 @@ export function IssuesList({
         })
         .map((key) => ({
           key,
-          label: key === "__no_workspace" ? "No Workspace" : (workspaceNameMap.get(key) ?? key.slice(0, 8)),
+          label: key === "__no_workspace" ? "Sem Espaço" : (workspaceNameMap.get(key) ?? key.slice(0, 8)),
           items: groups[key]!,
         }));
     }
@@ -508,7 +508,7 @@ export function IssuesList({
         })
         .map((key) => ({
           key,
-          label: key === "__no_parent" ? "No Parent" : (issueTitleMap.get(key) ?? key.slice(0, 8)),
+          label: key === "__no_parent" ? "Sem Pai" : (issueTitleMap.get(key) ?? key.slice(0, 8)),
           items: groups[key]!,
         }));
     }
@@ -521,7 +521,7 @@ export function IssuesList({
       key,
       label:
         key === "__unassigned"
-          ? "Unassigned"
+          ? "Não atribuído"
           : key.startsWith("__user:")
             ? (formatAssigneeUserLabel(key.slice("__user:".length), currentUserId) ?? "User")
             : (agentName(key) ?? key.slice(0, 8)),
@@ -548,8 +548,8 @@ export function IssuesList({
     return defaults;
   }, [baseCreateIssueDefaults, currentUserId, issueById, projectId, viewState.groupBy]);
 
-  const createActionLabel = createIssueLabel ? `Create ${createIssueLabel}` : "Create Issue";
-  const createButtonLabel = createIssueLabel ? `New ${createIssueLabel}` : "New Issue";
+  const createActionLabel = createIssueLabel ? `Criar ${createIssueLabel}` : "Criar Tarefa";
+  const createButtonLabel = createIssueLabel ? `Nova ${createIssueLabel}` : "Nova Tarefa";
   const openCreateIssueDialog = useCallback((groupKey?: string) => {
     openNewIssue(newIssueDefaults(groupKey));
   }, [newIssueDefaults, openNewIssue]);
@@ -603,14 +603,14 @@ export function IssuesList({
             <button
               className={`p-1.5 transition-colors ${viewState.viewMode === "list" ? "bg-accent text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               onClick={() => updateView({ viewMode: "list" })}
-              title="List view"
+              title="Visualização em lista"
             >
               <List className="h-3.5 w-3.5" />
             </button>
             <button
               className={`p-1.5 transition-colors ${viewState.viewMode === "board" ? "bg-accent text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               onClick={() => updateView({ viewMode: "board" })}
-              title="Board view"
+              title="Visualização em quadro"
             >
               <Columns3 className="h-3.5 w-3.5" />
             </button>
@@ -634,7 +634,7 @@ export function IssuesList({
             visibleColumnSet={visibleIssueColumnSet}
             onToggleColumn={toggleIssueColumn}
             onResetColumns={() => setIssueColumns(DEFAULT_INBOX_ISSUE_COLUMNS)}
-            title="Choose which issue columns stay visible"
+            title="Escolha quais colunas ficam visíveis"
             iconOnly
           />
 
@@ -662,11 +662,11 @@ export function IssuesList({
               <PopoverContent align="end" className="w-48 p-0">
                 <div className="p-2 space-y-0.5">
                   {([
-                    ["status", "Status"],
-                    ["priority", "Priority"],
-                    ["title", "Title"],
-                    ["created", "Created"],
-                    ["updated", "Updated"],
+                     ["status", "Status"],
+                    ["priority", "Prioridade"],
+                    ["title", "Título"],
+                    ["created", "Criado"],
+                    ["updated", "Atualizado"],
                   ] as const).map(([field, label]) => (
                     <button
                       key={field}
@@ -707,10 +707,10 @@ export function IssuesList({
                   {([
                     ["status", "Status"],
                     ["priority", "Priority"],
-                    ["assignee", "Assignee"],
-                    ["workspace", "Workspace"],
-                    ["parent", "Parent Issue"],
-                    ["none", "None"],
+                    ["assignee", "Responsável"],
+                    ["workspace", "Espaço de trabalho"],
+                    ["parent", "Tarefa pai"],
+                    ["none", "Nenhum"],
                   ] as const).map(([value, label]) => (
                     <button
                       key={value}
@@ -736,7 +736,7 @@ export function IssuesList({
       {!isLoading && filtered.length === 0 && viewState.viewMode === "list" && (
         <EmptyState
           icon={CircleDot}
-          message="No issues match the current filters or search."
+          message="Nenhuma tarefa corresponde aos filtros ou busca atual."
           action={createActionLabel}
           onAction={() => openCreateIssueDialog()}
         />
@@ -902,7 +902,7 @@ export function IssuesList({
                                           <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-dashed border-muted-foreground/35 bg-muted/30">
                                             <User className="h-3.5 w-3.5" />
                                           </span>
-                                          Assignee
+                                          Responsável
                                         </span>
                                       )}
                                     </button>
@@ -915,7 +915,7 @@ export function IssuesList({
                                   >
                                     <input
                                       className="mb-1 w-full border-b border-border bg-transparent px-2 py-1.5 text-xs outline-none placeholder:text-muted-foreground/50"
-                                      placeholder="Search assignees..."
+                                      placeholder="Buscar responsáveis..."
                                       value={assigneeSearch}
                                       onChange={(e) => setAssigneeSearch(e.target.value)}
                                       autoFocus
@@ -932,7 +932,7 @@ export function IssuesList({
                                           assignIssue(issue.id, null, null);
                                         }}
                                       >
-                                        No assignee
+                                        Sem responsável
                                       </button>
                                       {currentUserId && (
                                         <button
@@ -947,7 +947,7 @@ export function IssuesList({
                                           }}
                                         >
                                           <User className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-                                          <span>Me</span>
+                                          <span>Eu</span>
                                         </button>
                                       )}
                                       {(agents ?? [])

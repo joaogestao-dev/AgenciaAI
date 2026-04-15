@@ -329,7 +329,7 @@ export function Routines() {
   const [routineViewState, setRoutineViewState] = useState<RoutineViewState>(() => getRoutineViewState(routineViewStateKey));
 
   useEffect(() => {
-    setBreadcrumbs([{ label: "Routines" }]);
+    setBreadcrumbs([{ label: "Rotinas" }]);
   }, [setBreadcrumbs]);
 
   useEffect(() => {

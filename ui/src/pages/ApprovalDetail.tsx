@@ -65,7 +65,7 @@ export function ApprovalDetail() {
 
   useEffect(() => {
     setBreadcrumbs([
-      { label: "Approvals", href: "/approvals" },
+      { label: "Aprovações", href: "/approvals" },
       { label: approval?.id?.slice(0, 8) ?? approvalId ?? "Approval" },
     ]);
   }, [setBreadcrumbs, approval, approvalId]);
