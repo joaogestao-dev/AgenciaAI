@@ -143,6 +143,10 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
     "You are agent {{agent.id}} ({{agent.name}}). Continue your Paperclip work.",
   );
   const command = asString(config.command, "gemini");
+  // Caminho opcional pro script do Gemini CLI (bundle/gemini.js). Quando setado,
+  // o adapter executa `node <scriptPath> ...args` em vez de chamar o `gemini`
+  // via shim (.CMD/.cmd), evitando o bug de quoting de stdin no Windows.
+  const scriptPath = asString(config.scriptPath, "").trim();
   const model = asString(config.model, DEFAULT_GEMINI_LOCAL_MODEL).trim();
   const sandbox = asBoolean(config.sandbox, false);
 
@@ -328,8 +332,22 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
     heartbeatPromptChars: renderedPrompt.length,
   };
 
+  // Quando scriptPath estiver configurado, rodamos `node <scriptPath> ...args`
+  // direto, contornando o shim .CMD do npm no Windows (que corrompe quoting de
+  // args longos/complexos com multi-linhas e aspas).
+  const useNodeWithScript = scriptPath.length > 0;
+
+  // Prompts muito grandes via argv no Windows causam STATUS_STACK_BUFFER_OVERRUN
+  // (exit 0xC0000409) — observamos crash com ~5.5KB. Abaixo desse limite, inline
+  // e mais confiavel que stdin (pipes Node no Windows tem bugs com EOF + buffer
+  // grande, deixando o CLI esperando input).
+  const PROMPT_INLINE_MAX = 5000;
+  const promptViaStdin = useNodeWithScript && prompt.length > PROMPT_INLINE_MAX;
+
   const buildArgs = (resumeSessionId: string | null) => {
-    const args = ["--output-format", "stream-json"];
+    const args: string[] = [];
+    if (useNodeWithScript) args.push(scriptPath);
+    args.push("--output-format", "stream-json");
     if (resumeSessionId) args.push("--resume", resumeSessionId);
     if (model && model !== DEFAULT_GEMINI_LOCAL_MODEL) args.push("--model", model);
     args.push("--approval-mode", "yolo");
@@ -339,7 +357,7 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
       args.push("--sandbox=none");
     }
     if (extraArgs.length > 0) args.push(...extraArgs);
-    args.push("--prompt", prompt);
+    args.push("--prompt", promptViaStdin ? "" : prompt);
     return args;
   };
 
@@ -368,6 +386,7 @@ export async function execute(ctx: AdapterExecutionContext): Promise<AdapterExec
       graceSec,
       onSpawn,
       onLog,
+      ...(promptViaStdin ? { stdin: prompt } : {}),
     });
     return {
       proc,

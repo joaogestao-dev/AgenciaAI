@@ -1103,7 +1103,11 @@ export async function runChildProcess(
           env: mergedEnv,
           detached: process.platform !== "win32",
           shell: false,
-          stdio: [opts.stdin != null ? "pipe" : "ignore", "pipe", "pipe"],
+          // Sempre usar "pipe" para stdin. Com "ignore" no Windows, alguns CLIs
+          // (Gemini CLI 0.38+, por exemplo) detectam stdin ausente como TTY
+          // "broken" e travam em loop de espera de input. Com pipe + end()
+          // imediato quando nao ha input, eles recebem EOF limpo e seguem.
+          stdio: ["pipe", "pipe", "pipe"],
         }) as ChildProcessWithEvents;
         const startedAt = new Date().toISOString();
         const processGroupId = resolveProcessGroupId(child);
@@ -1150,11 +1154,30 @@ export async function runChildProcess(
         });
 
         const stdin = child.stdin;
-        if (opts.stdin != null && stdin) {
+        if (stdin) {
           void spawnPersistPromise.finally(() => {
             if (child.killed || stdin.destroyed) return;
-            stdin.write(opts.stdin as string);
-            stdin.end();
+            if (opts.stdin != null) {
+              // Espera drain se write retornar false (buffer cheio).
+              // Sem isso, end() imediato no Windows descarta bytes em payloads
+              // maiores que o pipe buffer (~4KB).
+              const ok = stdin.write(opts.stdin as string, "utf8", (err) => {
+                if (err) {
+                  onLogError(err, runId, "failed to write child stdin");
+                }
+              });
+              if (ok) {
+                stdin.end();
+              } else {
+                stdin.once("drain", () => {
+                  if (!stdin.destroyed) stdin.end();
+                });
+              }
+            } else {
+              // Sem input: fecha stdin com EOF para CLIs nao bloquearem
+              // esperando input.
+              stdin.end();
+            }
           });
         }
 

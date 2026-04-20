@@ -121,9 +121,22 @@ export function parseGeminiJsonl(stdout: string) {
       continue;
     }
 
+    // Gemini CLI 0.38+ emite {"type":"message","role":"assistant","content":"...","delta":true}
+    // para deltas do assistant. Acumulamos o conteudo como se fosse um assistant event.
+    if (type === "message" && asString(event.role, "").trim() === "assistant") {
+      const content = event.content;
+      if (typeof content === "string" && content.length > 0) {
+        messages.push(content);
+      } else if (Array.isArray(content)) {
+        messages.push(...collectMessageText({ content }));
+      }
+      continue;
+    }
+
     if (type === "result") {
       resultEvent = event;
-      accumulateUsage(usage, event.usage ?? event.usageMetadata);
+      // Gemini CLI 0.38+ expoe usage em event.stats (com input_tokens/output_tokens).
+      accumulateUsage(usage, event.usage ?? event.usageMetadata ?? event.stats);
       const resultText =
         asString(event.result, "").trim() ||
         asString(event.text, "").trim() ||

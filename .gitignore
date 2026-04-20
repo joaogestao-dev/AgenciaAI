@@ -45,6 +45,15 @@ feedback-export-*
 # Doc maintenance cursor
 .doc-review-cursor
 
+# Scripts locais Windows (ambiente do usuário, não portável)
+iniciar-escondido.vbs
+start-server.bat
+watchdog.ps1
+watchdog.log
+
+# Scratch de debug pessoal
+scratch.ts
+
 # Playwright
 tests/e2e/test-results/
 tests/e2e/playwright-report/
