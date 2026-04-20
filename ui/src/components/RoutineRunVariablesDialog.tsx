@@ -269,7 +269,7 @@ export function RoutineRunVariablesDialog({
                 placeholder="Agent"
                 noneLabel="Select an agent"
                 searchPlaceholder="Search agents..."
-                emptyMessage="No agents found."
+                emptyMessage="Nenhum agente encontrado."
                 disablePortal
                 openOnFocus={false}
                 onChange={(assigneeAgentId) => {
@@ -310,7 +310,7 @@ export function RoutineRunVariablesDialog({
                 placeholder="Project"
                 noneLabel="No project"
                 searchPlaceholder="Search projects..."
-                emptyMessage="No projects found."
+                emptyMessage="Nenhum projeto encontrado."
                 disablePortal
                 openOnFocus={false}
                 onChange={(projectId) => {

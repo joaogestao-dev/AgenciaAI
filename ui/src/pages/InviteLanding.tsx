@@ -111,7 +111,7 @@ export function InviteLandingPage() {
   }
 
   if (inviteQuery.isLoading || healthQuery.isLoading || sessionQuery.isLoading) {
-    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Loading invite...</div>;
+    return <div className="mx-auto max-w-xl py-10 text-sm text-muted-foreground">Carregando convite...</div>;
   }
 
   if (inviteQuery.error || !invite) {

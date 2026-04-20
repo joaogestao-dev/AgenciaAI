@@ -329,7 +329,7 @@ export function ProjectWorkspaceDetail() {
     },
   });
 
-  if (projectQuery.isLoading) return <p className="text-sm text-muted-foreground">Loading workspace…</p>;
+  if (projectQuery.isLoading) return <p className="text-sm text-muted-foreground">Carregando espaço de trabalho…</p>;
   if (projectQuery.error) {
     return (
       <p className="text-sm text-destructive">

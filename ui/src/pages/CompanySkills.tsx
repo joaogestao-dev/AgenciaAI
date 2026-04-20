@@ -539,7 +539,7 @@ function SkillPane({
     return (
       <EmptyState
         icon={Boxes}
-        message="Select a skill to inspect its files."
+        message="Selecione uma habilidade para inspecionar seus arquivos."
       />
     );
   }
@@ -1064,7 +1064,7 @@ export function CompanySkills() {
   });
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Boxes} message="Select a company to manage skills." />;
+    return <EmptyState icon={Boxes} message="Selecione uma empresa para gerenciar as habilidades." />;
   }
 
   function handleAddSkillSource() {

@@ -1110,7 +1110,7 @@ export function NewIssueDialog() {
                 disablePortal
                 noneLabel="No assignee"
                 searchPlaceholder="Search assignees..."
-                emptyMessage="No assignees found."
+                emptyMessage="Nenhum responsável encontrado."
                 onChange={(value) => {
                   const nextAssignee = parseAssigneeValue(value);
                   if (nextAssignee.assigneeAgentId) {
@@ -1161,7 +1161,7 @@ export function NewIssueDialog() {
                 disablePortal
                 noneLabel="No project"
                 searchPlaceholder="Search projects..."
-                emptyMessage="No projects found."
+                emptyMessage="Nenhum projeto encontrado."
                 onChange={handleProjectChange}
                 onConfirm={() => {
                   descriptionEditorRef.current?.focus();
@@ -1250,7 +1250,7 @@ export function NewIssueDialog() {
                 disablePortal
                 noneLabel="No reviewer"
                 searchPlaceholder="Search reviewers..."
-                emptyMessage="No reviewers found."
+                emptyMessage="Nenhum revisor encontrado."
                 onChange={setReviewerValue}
                 renderTriggerValue={(option) =>
                   option ? (
@@ -1294,7 +1294,7 @@ export function NewIssueDialog() {
                 disablePortal
                 noneLabel="No approver"
                 searchPlaceholder="Search approvers..."
-                emptyMessage="No approvers found."
+                emptyMessage="Nenhum aprovador encontrado."
                 onChange={setApproverValue}
                 renderTriggerValue={(option) =>
                   option ? (
@@ -1416,7 +1416,7 @@ export function NewIssueDialog() {
                     disablePortal
                     noneLabel="Default model"
                     searchPlaceholder="Search models..."
-                    emptyMessage="No models found."
+                    emptyMessage="Nenhum modelo encontrado."
                     onChange={setAssigneeModelOverride}
                   />
                 </div>

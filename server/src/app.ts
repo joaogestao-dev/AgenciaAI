@@ -312,7 +312,11 @@ export async function createApp(
           port: hmrPort,
           clientPort: hmrPort,
         },
-        allowedHosts: privateHostnameGateEnabled ? Array.from(privateHostnameAllowSet) : undefined,
+        allowedHosts: privateHostnameGateEnabled
+          ? Array.from(privateHostnameAllowSet)
+          : [...opts.allowedHostnames.map(h => h.trim().toLowerCase()).filter(Boolean), "localhost", "127.0.0.1"].length > 2
+            ? [...opts.allowedHostnames.map(h => h.trim().toLowerCase()).filter(Boolean), "localhost", "127.0.0.1"]
+            : true,
       },
     });
     viteHtmlRenderer = createCachedViteHtmlRenderer({

@@ -2862,8 +2862,8 @@ export function heartbeatService(db: Db) {
             previousStatus: "todo",
             latestRun,
             comment:
-              "Paperclip automatically retried dispatch for this assigned `todo` issue after a lost wake/run, " +
-              "but it still has no live execution path. Moving it to `blocked` so it is visible for intervention.",
+              "O Paperclip tentou automaticamente despachar esta tarefa `todo` atribuída após perder comunicação, " +
+              "mas ainda não encontrou um caminho de execução válido. Movendo-a para `blocked` (bloqueada) para que fique visível para sua intervenção.",
           });
           if (updated) {
             result.escalated += 1;
@@ -2897,9 +2897,9 @@ export function heartbeatService(db: Db) {
           previousStatus: "in_progress",
           latestRun,
           comment:
-            "Paperclip automatically retried continuation for this assigned `in_progress` issue after its live " +
-            "execution disappeared, but it still has no live execution path. Moving it to `blocked` so it is " +
-            "visible for intervention.",
+            "O Paperclip tentou continuar automaticamente esta tarefa `in_progress` após sua execução ao vivo " +
+            "desaparecer, mas ainda não tem um caminho de execução válido. Movendo a tarefa para `blocked` (bloqueada) " +
+            "para que fique visível para sua intervenção.",
         });
         if (updated) {
           result.escalated += 1;

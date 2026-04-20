@@ -29,6 +29,43 @@ export { executionWorkspaceService } from "./execution-workspaces.js";
 export { workspaceOperationService } from "./workspace-operations.js";
 export { workProductService } from "./work-products.js";
 export { logActivity, type LogActivityInput } from "./activity-log.js";
+export {
+  callLeverAction,
+  isLeverClientConfigured,
+  // discovery
+  leverListActions,
+  // reads
+  leverGetClientSnapshot,
+  leverListClients,
+  leverListClientTasks,
+  leverGetWorkspaceSummary,
+  leverListTeamMembers,
+  leverListLeads,
+  leverGetOnboardingState,
+  // writes — tasks
+  leverCreateClientTask,
+  leverUpdateClientTaskStatus,
+  leverAssignTask,
+  leverAddTaskComment,
+  leverUpdateTaskFields,
+  // writes — clients & onboarding
+  leverUpdateClientProfile,
+  leverCompleteOnboardingTask,
+  leverAdvanceOnboardingPhase,
+  // writes — CRM
+  leverCreateLead,
+  leverUpdateLeadStatus,
+  leverConvertLeadToClient,
+  // communication
+  leverSendClientNotification,
+  // errors / types
+  LeverClientError,
+  type LeverActionResult,
+  type LeverClientSnapshot,
+  type LeverTaskRow,
+  type LeverTeamMember,
+  type LeverLead,
+} from "./lever-client.js";
 export { notifyHireApproved, type NotifyHireApprovedInput } from "./hire-hook.js";
 export { publishLiveEvent, subscribeCompanyLiveEvents } from "./live-events.js";
 export { reconcilePersistedRuntimeServicesOnStartup, restartDesiredRuntimeServicesOnStartup } from "./workspace-runtime.js";

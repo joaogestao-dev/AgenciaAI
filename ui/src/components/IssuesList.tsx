@@ -623,7 +623,7 @@ export function IssuesList({
               size="icon"
               className={cn("hidden h-8 w-8 shrink-0 sm:inline-flex", viewState.nestingEnabled && "bg-accent")}
               onClick={() => updateView({ nestingEnabled: !viewState.nestingEnabled })}
-              title={viewState.nestingEnabled ? "Disable parent-child nesting" : "Enable parent-child nesting"}
+              title={viewState.nestingEnabled ? "Desativar aninhamento pai-filho" : "Ativar aninhamento pai-filho"}
             >
               <ListTree className="h-3.5 w-3.5" />
             </Button>
@@ -706,7 +706,7 @@ export function IssuesList({
                 <div className="p-2 space-y-0.5">
                   {([
                     ["status", "Status"],
-                    ["priority", "Priority"],
+                    ["priority", "Prioridade"],
                     ["assignee", "Responsável"],
                     ["workspace", "Espaço de trabalho"],
                     ["parent", "Tarefa pai"],

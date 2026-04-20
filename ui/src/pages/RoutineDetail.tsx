@@ -651,7 +651,7 @@ export function RoutineDetail() {
   const currentProject = editDraft.projectId ? projectById.get(editDraft.projectId) ?? null : null;
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Repeat} message="Select a company to view routines." />;
+    return <EmptyState icon={Repeat} message="Selecione uma empresa para ver as rotinas." />;
   }
 
   if (isLoading) {
@@ -789,7 +789,7 @@ export function RoutineDetail() {
             placeholder="Assignee"
             noneLabel="No assignee"
             searchPlaceholder="Search assignees..."
-            emptyMessage="No assignees found."
+            emptyMessage="Nenhum responsável encontrado."
             onChange={(assigneeAgentId) => {
               if (assigneeAgentId) trackRecentAssignee(assigneeAgentId);
               setEditDraft((current) => ({ ...current, assigneeAgentId }));
@@ -834,7 +834,7 @@ export function RoutineDetail() {
             placeholder="Project"
             noneLabel="No project"
             searchPlaceholder="Search projects..."
-            emptyMessage="No projects found."
+            emptyMessage="Nenhum projeto encontrado."
             onChange={(projectId) => setEditDraft((current) => ({ ...current, projectId }))}
             onConfirm={() => descriptionEditorRef.current?.focus()}
             renderTriggerValue={(option) =>

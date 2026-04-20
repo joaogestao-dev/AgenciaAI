@@ -447,7 +447,7 @@ export function ExecutionWorkspaceDetail() {
     },
   });
 
-  if (workspaceQuery.isLoading) return <p className="text-sm text-muted-foreground">Loading workspace…</p>;
+  if (workspaceQuery.isLoading) return <p className="text-sm text-muted-foreground">Carregando espaço de trabalho…</p>;
   if (workspaceQuery.error) {
     return (
       <p className="text-sm text-destructive">
@@ -556,7 +556,7 @@ export function ExecutionWorkspaceDetail() {
                 ? "No services have been started for this execution workspace yet."
                 : "No workspace command config is defined for this execution workspace yet."
             }
-            jobEmptyMessage="No one-shot jobs are configured for this execution workspace yet."
+            jobEmptyMessage="Nenhum trabalho único configurado para este espaço de execução ainda."
             disabledHint={
               canStartRuntimeServices
                 ? null

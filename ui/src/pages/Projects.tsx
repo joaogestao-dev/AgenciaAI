@@ -33,7 +33,7 @@ export function Projects() {
   );
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Hexagon} message="Select a company to view projects." />;
+    return <EmptyState icon={Hexagon} message="Selecione uma empresa para ver os projetos." />;
   }
 
   if (isLoading) {
@@ -45,7 +45,7 @@ export function Projects() {
       <div className="flex items-center justify-end">
         <Button size="sm" variant="outline" onClick={openNewProject}>
           <Plus className="h-4 w-4 mr-1" />
-          Add Project
+          Novo Projeto
         </Button>
       </div>
 
@@ -54,8 +54,8 @@ export function Projects() {
       {!isLoading && projects.length === 0 && (
         <EmptyState
           icon={Hexagon}
-          message="No projects yet."
-          action="Add Project"
+          message="Nenhum projeto ainda."
+          action="Novo Projeto"
           onAction={openNewProject}
         />
       )}

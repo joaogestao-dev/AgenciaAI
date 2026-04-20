@@ -57,7 +57,7 @@ export function InstanceGeneralSettings() {
   });
 
   if (generalQuery.isLoading) {
-    return <div className="text-sm text-muted-foreground">Loading general settings...</div>;
+    return <div className="text-sm text-muted-foreground">Carregando configurações gerais...</div>;
   }
 
   if (generalQuery.error) {

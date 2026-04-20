@@ -189,7 +189,7 @@ function firstNonEmptyLine(value: string | null | undefined): string | null {
 }
 
 function runFailureMessage(run: HeartbeatRun): string {
-  return firstNonEmptyLine(run.error) ?? firstNonEmptyLine(run.stderrExcerpt) ?? "Run exited with an error.";
+  return firstNonEmptyLine(run.error) ?? firstNonEmptyLine(run.stderrExcerpt) ?? "A execução terminou com um erro.";
 }
 
 function approvalStatusLabel(status: Approval["status"]): string {
@@ -353,7 +353,7 @@ export function FailedRunInboxRow({
           disabled={isRetrying}
         >
           <RotateCcw className="mr-1.5 h-3.5 w-3.5" />
-          {isRetrying ? "Retrying…" : "Retry"}
+          {isRetrying ? "Tentando…" : "Tentar novamente"}
         </Button>
         {!showUnreadSlot && (
           <button
@@ -495,7 +495,7 @@ function ApprovalInboxRow({
             onClick={onApprove}
             disabled={isPending}
           >
-            Approve
+            Aprovar
           </Button>
           <Button
             variant="destructive"
@@ -504,7 +504,7 @@ function ApprovalInboxRow({
             onClick={onReject}
             disabled={isPending}
           >
-            Reject
+            Rejeitar
           </Button>
         </div>
       ) : null}

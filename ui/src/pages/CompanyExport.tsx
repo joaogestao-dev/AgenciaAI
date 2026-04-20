@@ -500,7 +500,7 @@ function ExportPreviewPane({
 }) {
   if (!selectedFile || content === null) {
     return (
-      <EmptyState icon={Package} message="Select a file to preview its contents." />
+      <EmptyState icon={Package} message="Selecione um arquivo para pré-visualizar seu conteúdo." />
     );
   }
 
@@ -911,7 +911,7 @@ export function CompanyExport() {
   }
 
   if (!selectedCompanyId) {
-    return <EmptyState icon={Package} message="Select a company to export." />;
+    return <EmptyState icon={Package} message="Selecione uma empresa para exportar." />;
   }
 
   if (exportPreviewMutation.isPending && !exportData) {
@@ -919,7 +919,7 @@ export function CompanyExport() {
   }
 
   if (!exportData) {
-    return <EmptyState icon={Package} message="Loading export data..." />;
+    return <EmptyState icon={Package} message="Carregando dados de exportação..." />;
   }
 
   const previewContent = selectedFile

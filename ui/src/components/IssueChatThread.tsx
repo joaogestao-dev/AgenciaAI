@@ -1801,7 +1801,7 @@ const IssueChatComposer = forwardRef<IssueChatComposerHandle, IssueChatComposerP
             placeholder="Assignee"
             noneLabel="No assignee"
             searchPlaceholder="Search assignees..."
-            emptyMessage="No assignees found."
+            emptyMessage="Nenhum responsável encontrado."
             onChange={setReassignTarget}
             className="h-8 text-xs"
             renderTriggerValue={(option) => {

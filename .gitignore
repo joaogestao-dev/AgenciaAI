@@ -54,6 +54,10 @@ watchdog.log
 # Scratch de debug pessoal
 scratch.ts
 
+# Claude Code (arquivos locais de sessao/agendamento)
+.claude/scheduled_tasks.lock
+.claude/memory/
+
 # Playwright
 tests/e2e/test-results/
 tests/e2e/playwright-report/

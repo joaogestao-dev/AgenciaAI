@@ -950,7 +950,7 @@ export function CommentThread({
                 placeholder="Assignee"
                 noneLabel="No assignee"
                 searchPlaceholder="Search assignees..."
-                emptyMessage="No assignees found."
+                emptyMessage="Nenhum responsável encontrado."
                 onChange={setReassignTarget}
                 className="text-xs h-8"
                 renderTriggerValue={(option) => {

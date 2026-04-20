@@ -1014,7 +1014,7 @@ export function DesignGuide() {
         <div className="border border-border rounded-md">
           <EmptyState
             icon={Inbox}
-            message="No items to show. Create your first one to get started."
+            message="Nenhum item para mostrar. Crie o seu primeiro para começar."
             action="Create Item"
             onAction={() => {}}
           />

@@ -658,7 +658,7 @@ function IssueDetailChatTab({
             disabled={commentsLoadingOlder}
             onClick={onLoadOlderComments}
           >
-            {commentsLoadingOlder ? "Loading earlier comments..." : "Load earlier comments"}
+            {commentsLoadingOlder ? "Carregando comentários anteriores..." : "Carregar comentários anteriores"}
           </Button>
         </div>
       ) : null}
@@ -958,7 +958,7 @@ export function IssueDetail() {
   });
   const hasLiveRuns = liveRunCount > 0 || hasActiveRun;
   const sourceBreadcrumb = useMemo(
-    () => readIssueDetailBreadcrumb(issueId, location.state, location.search) ?? { label: "Issues", href: "/issues" },
+    () => readIssueDetailBreadcrumb(issueId, location.state, location.search) ?? { label: "Tarefas", href: "/issues" },
     [issueId, location.state, location.search],
   );
 
@@ -1378,8 +1378,8 @@ export function IssueDetail() {
         queryClient.setQueryData(queryKeys.issues.detail(issueId!), context.previousIssue);
       }
       pushToast({
-        title: "Comment failed",
-        body: err instanceof Error ? err.message : "Unable to post comment",
+        title: "Comentário falhou",
+        body: err instanceof Error ? err.message : "Não foi possível publicar o comentário",
         tone: "error",
       });
     },
@@ -1552,8 +1552,8 @@ export function IssueDetail() {
       invalidateIssueDetail();
       invalidateIssueRunState();
       pushToast({
-        title: "Interrupt requested",
-        body: "The active run is stopping so queued comments can continue next.",
+        title: "Interrupção solicitada",
+        body: "A execução ativa está parando para que os comentários enfileirados continuem.",
         tone: "success",
       });
     },
@@ -1562,8 +1562,8 @@ export function IssueDetail() {
       queryClient.setQueryData(queryKeys.issues.liveRuns(issueId!), context?.previousLiveRuns);
       queryClient.setQueryData(queryKeys.issues.activeRun(issueId!), context?.previousActiveRun);
       pushToast({
-        title: "Interrupt failed",
-        body: err instanceof Error ? err.message : "Unable to interrupt the active run",
+        title: "Interrupção falhou",
+        body: err instanceof Error ? err.message : "Não foi possível interromper a execução ativa",
         tone: "error",
       });
     },
@@ -1578,15 +1578,15 @@ export function IssueDetail() {
       invalidateIssueThreadLazily();
       invalidateIssueCollections();
       pushToast({
-        title: "Queued comment canceled",
-        body: "The queued message was restored to the composer.",
+        title: "Comentário enfileirado cancelado",
+        body: "A mensagem enfileirada foi restaurada no editor.",
         tone: "success",
       });
     },
     onError: (err) => {
       pushToast({
-        title: "Cancel failed",
-        body: err instanceof Error ? err.message : "Unable to cancel the queued comment",
+        title: "Cancelamento falhou",
+        body: err instanceof Error ? err.message : "Não foi possível cancelar o comentário enfileirado",
         tone: "error",
       });
     },
@@ -1737,12 +1737,12 @@ export function IssueDetail() {
     onSuccess: () => {
       invalidateIssueCollections();
       navigate(sourceBreadcrumb.href.startsWith("/inbox") ? sourceBreadcrumb.href : "/inbox", { replace: true });
-      pushToast({ title: "Issue archived from inbox", tone: "success" });
+      pushToast({ title: "Tarefa arquivada da caixa de entrada", tone: "success" });
     },
     onError: (err) => {
       pushToast({
-        title: "Archive failed",
-        body: err instanceof Error ? err.message : "Unable to archive this issue from the inbox",
+        title: "Arquivamento falhou",
+        body: err instanceof Error ? err.message : "Não foi possível arquivar esta tarefa da caixa de entrada",
         tone: "error",
       });
     },
@@ -1975,7 +1975,7 @@ export function IssueDetail() {
     const md = `# ${issue.identifier}: ${title}\n\n${body}`.trimEnd();
     await navigator.clipboard.writeText(md);
     setCopied(true);
-    pushToast({ title: "Copied to clipboard", tone: "success" });
+    pushToast({ title: "Copiado para a área de transferência", tone: "success" });
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -2095,10 +2095,10 @@ export function IssueDetail() {
         )}
       >
         <Paperclip className="h-3.5 w-3.5 mr-1.5" />
-        {uploadAttachment.isPending || importMarkdownDocument.isPending ? "Uploading..." : (
+        {uploadAttachment.isPending || importMarkdownDocument.isPending ? "Enviando..." : (
           <>
-            <span className="hidden sm:inline">Upload attachment</span>
-            <span className="sm:hidden">Upload</span>
+            <span className="hidden sm:inline">Enviar anexo</span>
+            <span className="sm:hidden">Enviar</span>
           </>
         )}
       </Button>
@@ -2137,7 +2137,7 @@ export function IssueDetail() {
       {issue.hiddenAt && (
         <div className="flex items-center gap-2 rounded-md border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
           <EyeOff className="h-4 w-4 shrink-0" />
-          This issue is hidden
+          Esta tarefa está oculta
         </div>
       )}
 
@@ -2223,7 +2223,7 @@ export function IssueDetail() {
                 variant="ghost"
                 size="icon-xs"
                 onClick={() => setMobilePropsOpen(true)}
-                title="Properties"
+                title="Propriedades"
               >
                 <SlidersHorizontal className="h-4 w-4" />
               </Button>
@@ -2546,11 +2546,11 @@ export function IssueDetail() {
         <TabsList variant="line" className="w-full justify-start gap-1">
           <TabsTrigger value="chat" className="gap-1.5">
             <MessageSquare className="h-3.5 w-3.5" />
-            Chat
+            Conversa
           </TabsTrigger>
           <TabsTrigger value="activity" className="gap-1.5">
             <ActivityIcon className="h-3.5 w-3.5" />
-            Activity
+            Atividade
           </TabsTrigger>
           {issuePluginTabItems.map((item) => (
             <TabsTrigger key={item.value} value={item.value}>
@@ -2650,7 +2650,7 @@ export function IssueDetail() {
       <Sheet open={mobilePropsOpen} onOpenChange={setMobilePropsOpen}>
         <SheetContent side="bottom" className="max-h-[85dvh] pb-[env(safe-area-inset-bottom)]">
           <SheetHeader>
-            <SheetTitle className="text-sm">Properties</SheetTitle>
+            <SheetTitle className="text-sm">Propriedades</SheetTitle>
           </SheetHeader>
           <ScrollArea className="flex-1 overflow-y-auto">
             <div className="px-4 pb-4">

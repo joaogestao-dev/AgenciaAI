@@ -39,7 +39,7 @@ export function InstanceExperimentalSettings() {
   });
 
   if (experimentalQuery.isLoading) {
-    return <div className="text-sm text-muted-foreground">Loading experimental settings...</div>;
+    return <div className="text-sm text-muted-foreground">Carregando configurações experimentais...</div>;
   }
 
   if (experimentalQuery.error) {

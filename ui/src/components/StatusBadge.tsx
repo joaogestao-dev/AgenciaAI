@@ -1,7 +1,21 @@
 import { cn } from "../lib/utils";
 import { statusBadge, statusBadgeDefault } from "../lib/status-colors";
 
+const translatedStatuses: Record<string, string> = {
+  succeeded: "sucesso",
+  failed: "falha",
+  error: "erro",
+  running: "rodando",
+  queued: "na fila",
+  timed_out: "esgotado",
+  cancelled: "cancelado",
+  idle: "ocioso",
+  done: "concluído",
+  in_progress: "em progresso"
+};
+
 export function StatusBadge({ status }: { status: string }) {
+  const displayStatus = translatedStatuses[status] ?? status.replace("_", " ");
   return (
     <span
       className={cn(
@@ -9,7 +23,7 @@ export function StatusBadge({ status }: { status: string }) {
         statusBadge[status] ?? statusBadgeDefault
       )}
     >
-      {status.replace("_", " ")}
+      {displayStatus}
     </span>
   );
 }

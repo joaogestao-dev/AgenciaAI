@@ -155,7 +155,7 @@ export function PluginManager() {
     [installedPlugins]
   );
 
-  if (isLoading) return <div className="p-4 text-sm text-muted-foreground">Loading plugins...</div>;
+  if (isLoading) return <div className="p-4 text-sm text-muted-foreground">Carregando plugins...</div>;
   if (error) return <div className="p-4 text-sm text-destructive">Failed to load plugins.</div>;
 
   return (
@@ -224,7 +224,7 @@ export function PluginManager() {
         </div>
 
         {examplesQuery.isLoading ? (
-          <div className="text-sm text-muted-foreground">Loading bundled examples...</div>
+          <div className="text-sm text-muted-foreground">Carregando exemplos incluídos...</div>
         ) : examplesQuery.error ? (
           <div className="text-sm text-destructive">Failed to load bundled examples.</div>
         ) : examples.length === 0 ? (

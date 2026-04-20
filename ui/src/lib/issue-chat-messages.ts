@@ -429,18 +429,18 @@ export function formatDurationWords(ms: number | null) {
   if (ms === null || !Number.isFinite(ms) || ms <= 0) return null;
   const totalSeconds = Math.max(1, Math.round(ms / 1000));
   if (totalSeconds < 60) {
-    return `${totalSeconds} second${totalSeconds === 1 ? "" : "s"}`;
+    return `${totalSeconds} segundo${totalSeconds === 1 ? "" : "s"}`;
   }
   const totalMinutes = Math.round(totalSeconds / 60);
   if (totalMinutes < 60) {
-    return `${totalMinutes} minute${totalMinutes === 1 ? "" : "s"}`;
+    return `${totalMinutes} minuto${totalMinutes === 1 ? "" : "s"}`;
   }
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
   if (minutes === 0) {
-    return `${hours} hour${hours === 1 ? "" : "s"}`;
+    return `${hours} hora${hours === 1 ? "" : "s"}`;
   }
-  return `${hours} hour${hours === 1 ? "" : "s"} ${minutes} minute${minutes === 1 ? "" : "s"}`;
+  return `${hours} hora${hours === 1 ? "" : "s"} e ${minutes} minuto${minutes === 1 ? "" : "s"}`;
 }
 
 function runDurationLabel(run: {
@@ -455,18 +455,18 @@ function runDurationLabel(run: {
   const durationText = formatDurationWords(durationMs);
   switch (run.status) {
     case "succeeded":
-      return durationText ? `Worked for ${durationText}` : "Finished work";
+      return durationText ? `Trabalhou por ${durationText}` : "Trabalho concluído";
     case "failed":
     case "error":
-      return durationText ? `Failed after ${durationText}` : "Run failed";
+      return durationText ? `Falhou após ${durationText}` : "Execução falhou";
     case "timed_out":
-      return durationText ? `Timed out after ${durationText}` : "Run timed out";
+      return durationText ? `Tempo esgotado após ${durationText}` : "Tempo esgotado";
     case "cancelled":
-      return durationText ? `Cancelled after ${durationText}` : "Run cancelled";
+      return durationText ? `Cancelado após ${durationText}` : "Execução cancelada";
     case "queued":
-      return "Queued";
+      return "Na fila";
     case "running":
-      return "Working...";
+      return "Trabalhando...";
     default:
       return formatStatusLabel(run.status);
   }
