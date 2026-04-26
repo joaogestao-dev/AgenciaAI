@@ -5,7 +5,7 @@
     "buildCommand": "corepack enable && pnpm install --no-frozen-lockfile && pnpm build"
   },
   "deploy": {
-    "startCommand": "node --import ./server/node_modules/tsx/dist/loader.mjs server/dist/index.js",
+    "startCommand": "PATH=/app/server/node_modules/.bin:/app/node_modules/.bin:$PATH node --import ./server/node_modules/tsx/dist/loader.mjs server/dist/index.js",
     "healthcheckPath": "/api/health",
     "healthcheckTimeout": 120,
     "restartPolicyType": "ON_FAILURE",
